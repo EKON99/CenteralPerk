@@ -12,14 +12,14 @@ class EventListenerImpl : EventListener {
     /**
      * Changing loader visibility state to true
      **/
-    override fun showLoader() {
+    override suspend fun showLoader() {
         loaderVisibilityMutableStateFlow.value = true
     }
 
     /**
      * Changing loader visibility state to false
      */
-    override fun hideLoader() {
+    override suspend fun hideLoader() {
         loaderVisibilityMutableStateFlow.value = false
     }
 

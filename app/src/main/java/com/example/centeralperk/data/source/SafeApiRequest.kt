@@ -9,13 +9,13 @@ abstract class SafeApiRequest {
 
     suspend fun <T> apiRequest(call: suspend () -> Response<T>): ApiResponse<T?> {
 
-        /**
-         * Calling the Api request
-         * Storing the response in apiResponse variable
-         * */
-        val apiResponse = call.invoke()
-
         return try {
+
+            /**
+             * Calling the Api request
+             * Storing the response in apiResponse variable
+             * */
+            val apiResponse = call.invoke()
 
             if (apiResponse.isSuccessful) {
 
@@ -44,7 +44,7 @@ abstract class SafeApiRequest {
          */
         catch (e: IOException) {
 
-            ApiResponse.UnKnownError(AppConstant.INTERNET_CONNECTION)
+            ApiResponse.UnKnownError(AppConstant.SERVER_TIME_OUT)
         }
 
         /**

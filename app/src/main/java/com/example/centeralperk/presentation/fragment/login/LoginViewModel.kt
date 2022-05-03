@@ -47,23 +47,23 @@ class LoginViewModel @Inject constructor(
         /** Calling Api in coroutine  */
         viewModelScope.launch(Dispatchers.IO) {
 
+            /** Showing loader */
+            eventListener.showLoader()
+
             /** Creating json object for api request */
             val json = JsonObject()
             json.addProperty(AppConstant.USERNAME, emailOrUserName.get())
             json.addProperty(AppConstant.PASSWORD, password.get())
 
+            /** Calling the loginUseCase */
             val response = loginUseCase.loginUseCase(json)
+
+            /** Hiding the loader */
+            eventListener.hideLoader()
 
             when (response) {
                 is ApiResponse.SuccessFul -> {
 
-                    viewModelScope.launch(Dispatchers.Main) {
-                        Toast.makeText(
-                            app.baseContext,
-                            response.successFul?.message.toString(),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
                 }
                 is ApiResponse.ApiError<*> -> {
 
@@ -84,7 +84,6 @@ class LoginViewModel @Inject constructor(
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-
                 }
             }
         }

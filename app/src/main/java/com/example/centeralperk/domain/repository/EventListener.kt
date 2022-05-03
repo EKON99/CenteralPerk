@@ -7,12 +7,12 @@ interface EventListener {
     /**
      * Changing loader visibility state to true
      **/
-    fun showLoader()
+    suspend fun showLoader()
 
     /**
      * Changing loader visibility state to false
      */
-    fun hideLoader()
+    suspend fun hideLoader()
 
     /**
      * Getting loader visibility state
