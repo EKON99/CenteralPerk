@@ -9,6 +9,11 @@ class LoginUseCase(
     private val networkRepo: NetworkRepo
 ) {
 
+    /**
+     * Calling network repository login function
+     * @param jsonObject
+     * @return ApiResponse LoginResponseModel
+     * */
     suspend fun loginUseCase(jsonObject: JsonObject) : ApiResponse<LoginResponseModel?>{
         return networkRepo.login(jsonObject)
     }

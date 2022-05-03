@@ -1,11 +1,14 @@
 package com.example.centeralperk.presentation.fragment.login
 
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.centeralperk.app.App
 import com.example.centeralperk.data.source.ApiResponse
 import com.example.centeralperk.domain.repository.EventListener
-import com.example.centeralperk.domain.repository.NetworkRepo
+import com.example.centeralperk.domain.usecase.LoginUseCase
+import com.example.centeralperk.util.AppConstant
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,15 +19,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val networkRepoImp: NetworkRepo,
-    private val eventListener: EventListener
+    private val loginUseCase: LoginUseCase,
+    private val eventListener: EventListener,
+    private val app: App
 ) : ViewModel() {
 
     val emailOrUserName = ObservableField("")
 
     val password = ObservableField("")
 
-    // Password visibility StateFlow
+    /** Password visibility StateFlow */
     private val visibilityMutableState = MutableStateFlow(false)
     val visibility = visibilityMutableState.asStateFlow()
 
@@ -36,26 +40,53 @@ class LoginViewModel @Inject constructor(
     }
 
     /**
-     * Calling login function
+     * Calling the useCase login function
      */
     fun login() {
 
+        /** Calling Api in coroutine  */
         viewModelScope.launch(Dispatchers.IO) {
-            val json = JsonObject()
-            json.addProperty("email", emailOrUserName.get())
-            json.addProperty("password", password.get())
 
-            val response = networkRepoImp.login(json)
+            /** Creating json object for api request */
+            val json = JsonObject()
+            json.addProperty(AppConstant.USERNAME, emailOrUserName.get())
+            json.addProperty(AppConstant.PASSWORD, password.get())
+
+            val response = loginUseCase.loginUseCase(json)
 
             when (response) {
                 is ApiResponse.SuccessFul -> {
 
+                    viewModelScope.launch(Dispatchers.Main) {
+                        Toast.makeText(
+                            app.baseContext,
+                            response.successFul?.message.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
-                is ApiResponse.ApiError<*> -> {}
-                is ApiResponse.UnKnownError<*> -> {}
+                is ApiResponse.ApiError<*> -> {
+
+                    viewModelScope.launch(Dispatchers.Main) {
+                        Toast.makeText(
+                            app.baseContext,
+                            response.apiError.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                is ApiResponse.UnKnownError<*> -> {
+
+                    viewModelScope.launch(Dispatchers.Main) {
+                        Toast.makeText(
+                            app.baseContext,
+                            response.unKnownError.toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                }
             }
-
         }
-
     }
 }

@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class DialogLoaderFragment @Inject constructor() : DialogFragment() {
 
-    // Data binding component
+    /** Data binding component */
     private lateinit var binding: FragmentDialogLoaderBinding
 
     override fun onCreateView(
@@ -23,7 +23,7 @@ class DialogLoaderFragment @Inject constructor() : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        // Data binding
+        /** Data binding */
         binding = FragmentDialogLoaderBinding.inflate(layoutInflater)
 
         return binding.root
@@ -32,13 +32,13 @@ class DialogLoaderFragment @Inject constructor() : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Background transparent
+        /** Background transparent */
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        // Dialog box outside click disable
+        /** Dialog box outside click disable */
         dialog?.setCanceledOnTouchOutside(false)
 
-        // Image rotate
+        /** Image rotate */
         imageRotate()
     }
 

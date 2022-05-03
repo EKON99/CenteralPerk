@@ -17,13 +17,13 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    // Data binding component
+    /** Data binding component */
     private lateinit var binding: ActivityMainBinding
 
-    // ViewModel dependency
+    /** ViewModel dependency */
     private val viewModel: MainViewModel by viewModels()
 
-    // Loader dependency
+    /** Loader dependency */
     @Inject
     lateinit var loader: DialogLoaderFragment
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        // SetObserver
+        /** SetObserver */
         setObserver()
     }
 
@@ -50,14 +50,13 @@ class MainActivity : AppCompatActivity() {
             viewModel.loaderState().collect { loaderState ->
 
                 if (loaderState) {
-
-                    // Showing the loader
+                    /** Showing the loader */
                     loader.show(supportFragmentManager, AppConstant.LOADER_TAG)
                     viewModel.dialogBoxOpenState = true
 
                 } else if (viewModel.dialogBoxOpenState) {
 
-                    // Dismissing the loader
+                    /** Dismissing the loader */
                     loader.dismiss()
                 }
             }

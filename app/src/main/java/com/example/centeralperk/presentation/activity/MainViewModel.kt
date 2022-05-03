@@ -11,7 +11,7 @@ class MainViewModel @Inject constructor(
     private val eventListener: EventListener
 ) : ViewModel() {
 
-    // Check dialog visibility
+    /** Check dialog visibility */
     var dialogBoxOpenState = false
 
     /**

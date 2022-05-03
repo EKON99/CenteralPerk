@@ -74,6 +74,7 @@
                             style="@style/edit_text_style"
                             android:layout_width="0dp"
                             android:hint="@string/password"
+                            android:maxLength="30"
                             android:inputType="textPassword"
                             android:text="@={data.password}"
                             app:layout_constraintBottom_toBottomOf="parent"

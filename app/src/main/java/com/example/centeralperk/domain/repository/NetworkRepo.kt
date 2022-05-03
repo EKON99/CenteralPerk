@@ -1,11 +1,15 @@
 package com.example.centeralperk.domain.repository
 
 import com.example.centeralperk.data.source.ApiResponse
-import com.example.centeralperk.domain.model.Temp
+import com.example.centeralperk.domain.model.LoginResponseModel
 import com.google.gson.JsonObject
-import retrofit2.Response
 
 interface NetworkRepo {
 
-    suspend fun login(jsonObject: JsonObject): ApiResponse<Temp?>
+    /**
+     * Calling ApiInterface Login function
+     *  @param jsonObject
+     *  @return ApiResponse LoginResponseModel
+     */
+    suspend fun login(jsonObject: JsonObject): ApiResponse<LoginResponseModel?>
 }

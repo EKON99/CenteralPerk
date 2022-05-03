@@ -6,9 +6,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Keep
 @Parcelize
-data class Temp(
-    val `data`: Data?,
-    val message: String?,
-    val status: Int?,
-    val url: String?
+data class LoginResponseModel(
+    val `data`: Data,
+    val message: String,
+    val status: Boolean
 ) : Parcelable
