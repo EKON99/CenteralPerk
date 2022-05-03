@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
                     loader.show(supportFragmentManager, AppConstant.LOADER_TAG)
                     viewModel.dialogBoxOpenState = true
 
-                } else if (viewModel.dialogBoxOpenState) {
-
+                }else if (viewModel.dialogBoxOpenState) {
                     /** Dismissing the loader */
                     loader.dismiss()
                 }

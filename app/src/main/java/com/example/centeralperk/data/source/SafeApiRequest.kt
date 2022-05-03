@@ -29,8 +29,9 @@ abstract class SafeApiRequest {
                 try {
 
                     /** Getting the errorBody message */
-                    val error = apiResponse.errorBody().toString()
-                    ApiResponse.ApiError(JSONObject(error).getString(AppConstant.MESSAGE))
+                    val error = apiResponse.errorBody()?.charStream()?.readText()
+                        ?.let { errorMessage -> JSONObject(errorMessage) }
+                    ApiResponse.ApiError(error?.getString(AppConstant.MESSAGE))
 
                 } catch (e: Exception) {
 

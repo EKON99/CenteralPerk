@@ -12,6 +12,7 @@ import com.example.centeralperk.util.AppConstant
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -57,6 +58,9 @@ class LoginViewModel @Inject constructor(
 
             /** Calling the loginUseCase */
             val response = loginUseCase.loginUseCase(json)
+
+            /** 2 seconds delay 'just to see loader ' */
+            delay(2000)
 
             /** Hiding the loader */
             eventListener.hideLoader()
