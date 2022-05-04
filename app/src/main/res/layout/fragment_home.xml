@@ -7,6 +7,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="sdljflasfsl;asd;f"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
