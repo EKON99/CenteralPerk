@@ -1,4 +1,4 @@
-package com.example.centeralperk.presentation.fragment
+package com.example.centeralperk.presentation.fragment.splash
 
 import android.os.Bundle
 import android.view.LayoutInflater
