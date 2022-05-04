@@ -18,7 +18,6 @@ class AppConstant {
         /** Preference dataStore key and name */
         const val PREFERENCE_DATASTORE = "Preference dataStore"
         const val AUTH_TOKEN = "Auth Token"
-        const val NO_DATA = "No Data"
 
         /** Api Tag */
         const val EMAIL = "email"

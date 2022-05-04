@@ -42,7 +42,7 @@ class PreferenceDataStore(val context: Context) {
 
         /** Returning the data of the key */
         return context.dataStore.data.map { preference ->
-            preference[preferenceKey] ?: AppConstant.NO_DATA
+            preference[preferenceKey]
         }
     }
 }
