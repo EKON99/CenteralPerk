@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     /** ViewModel dependency */
     private val viewModel: MainViewModel by viewModels()
 
+    /** Check dialog visibility */
+    var dialogBoxOpenState = false
+
     /** Loader dependency */
     @Inject
     lateinit var loader: DialogLoaderFragment
@@ -52,9 +55,9 @@ class MainActivity : AppCompatActivity() {
                 if (loaderState) {
                     /** Showing the loader */
                     loader.show(supportFragmentManager, AppConstant.LOADER_TAG)
-                    viewModel.dialogBoxOpenState = true
+                    dialogBoxOpenState = true
 
-                }else if (viewModel.dialogBoxOpenState) {
+                } else if (dialogBoxOpenState) {
                     /** Dismissing the loader */
                     loader.dismiss()
                 }

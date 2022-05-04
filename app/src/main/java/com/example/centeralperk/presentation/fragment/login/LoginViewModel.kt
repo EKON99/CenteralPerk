@@ -9,6 +9,7 @@ import com.example.centeralperk.data.source.ApiResponse
 import com.example.centeralperk.domain.repository.EventListener
 import com.example.centeralperk.domain.usecase.LoginUseCase
 import com.example.centeralperk.util.AppConstant
+import com.example.centeralperk.util.PreferenceDataStore
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val eventListener: EventListener,
-    private val app: App
+    private val app: App,
+    private val preferenceDataStore: PreferenceDataStore
 ) : ViewModel() {
 
     val emailOrUserName = ObservableField("")
@@ -67,6 +69,15 @@ class LoginViewModel @Inject constructor(
 
             when (response) {
                 is ApiResponse.SuccessFul -> {
+
+                    /** Storing the authToken in preference dataStore */
+                    preferenceDataStore.write(
+                        AppConstant.AUTH_TOKEN,
+                        response.successFul?.data?.token
+                    )
+
+                    /** Storing the authToken in application class */
+                    response.successFul?.data?.token?.let { token -> app.setAuthToken(token) }
 
                 }
                 is ApiResponse.ApiError<*> -> {
