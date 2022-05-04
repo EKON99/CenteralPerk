@@ -15,7 +15,12 @@ class AppConstant {
         const val USER_NAME_OR_EMAIL_EMPTY = "Username or email is required"
         const val PASSWORD_EMPTY = "Password is required"
 
-        // Api Tag
+        /** Preference dataStore key and name */
+        const val PREFERENCE_DATASTORE = "Preference dataStore"
+        const val AUTH_TOKEN = "Auth Token"
+        const val NO_DATA = "No Data"
+
+        /** Api Tag */
         const val EMAIL = "email"
         const val USERNAME = "username"
         const val PASSWORD = "password"
