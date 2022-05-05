@@ -12,6 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.centeralperk.R
 import com.example.centeralperk.databinding.FragmentSignUpBinding
+import com.example.centeralperk.util.AppConstant
+import com.example.centeralperk.util.Validation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -90,6 +92,59 @@ class SignUpFragment : Fragment() {
         /** Navigating back to login fragment */
         binding.tvLogin.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        /**
+         * Calling viewModel signUp function and validating the inputs
+         * */
+        binding.btnSignUp.setOnClickListener {
+
+            /** Name validation */
+            if (viewModel.name.get().isNullOrEmpty()) {
+                binding.etName.error = AppConstant.NAME_EMPTY
+                binding.etName.requestFocus()
+
+                return@setOnClickListener
+            }
+
+            /** UserName validation */
+            viewModel.userName.get()?.let { username ->
+                if (username.length < 4) {
+                    binding.etUserName.error = AppConstant.USER_NAME_EMPTY
+                    binding.etUserName.requestFocus()
+
+                    return@setOnClickListener
+                }
+            }
+
+            /** Email validation */
+            if (viewModel.email.get().isNullOrEmpty()) {
+                binding.etEmail.error = AppConstant.EMAIL_EMPTY
+                binding.etEmail.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (viewModel.email.get()?.trim()
+                    ?.let { email -> Validation.emailValidation(email) } == false
+            ) {
+                binding.etEmail.error = AppConstant.EMAIL_VALIDATION
+                binding.etEmail.requestFocus()
+
+                return@setOnClickListener
+            }
+
+            /** Password validation */
+            viewModel.password.get()?.let { password ->
+                if (password.length < 4) {
+                    binding.etPassword.error = AppConstant.PASSWORD_REQUIRED
+                    binding.etPassword.requestFocus()
+
+                    return@setOnClickListener
+                }
+            }
+
+            /** Calling viewModel signUp function*/
+            viewModel.signUp()
         }
     }
 }

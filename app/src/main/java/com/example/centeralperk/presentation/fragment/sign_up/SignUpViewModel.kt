@@ -28,4 +28,11 @@ class SignUpViewModel @Inject constructor() : ViewModel(){
     fun passwordVisibility() {
         visibilityMutableState.value = visibilityMutableState.value.not()
     }
+
+    /**
+     * Calling signUpUseCase signUp function
+     */
+    fun signUp() {
+
+    }
 }

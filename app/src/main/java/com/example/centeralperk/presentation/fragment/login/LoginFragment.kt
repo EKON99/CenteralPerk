@@ -104,7 +104,7 @@ class LoginFragment : Fragment() {
             /** UserName or email is empty validation */
             if (viewModel.emailOrUserName.get().isNullOrEmpty()) {
                 binding.etEmail.error = AppConstant.USER_NAME_OR_EMAIL_EMPTY
-                binding.etPassword.requestFocus()
+                binding.etEmail.requestFocus()
                 return@setOnClickListener
             }
 

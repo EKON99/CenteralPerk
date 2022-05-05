@@ -55,7 +55,7 @@ class LoginViewModel @Inject constructor(
 
             /** Creating json object for api request */
             val json = JsonObject()
-            json.addProperty(AppConstant.USERNAME, emailOrUserName.get())
+            json.addProperty(AppConstant.USERNAME, emailOrUserName.get()?.trim())
             json.addProperty(AppConstant.PASSWORD, password.get())
 
             /** Calling the loginUseCase */
