@@ -14,6 +14,7 @@ import com.example.centeralperk.R
 import com.example.centeralperk.databinding.FragmentLoginBinding
 import com.example.centeralperk.util.AppConstant
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -84,8 +85,10 @@ class LoginFragment : Fragment() {
             viewModel.navigate.collect { navigationState ->
                 if (navigationState) {
 
-                    /** Navigating back to home fragment */
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        /** Navigating back to home fragment */
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    }
                 }
             }
         }

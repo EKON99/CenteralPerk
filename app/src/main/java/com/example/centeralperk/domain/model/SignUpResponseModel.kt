@@ -2,13 +2,12 @@ package com.example.centeralperk.domain.model
 
 import android.os.Parcelable
 import androidx.annotation.Keep
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Keep
 @Parcelize
 data class SignUpResponseModel(
-    val email: String,
-    val name: String,
-    val password: String,
-    val username: String
+    val msg: String,
+    val status: Boolean
 ) : Parcelable
