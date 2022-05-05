@@ -43,31 +43,33 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var authenticationToken = ""
-
         /** Getting the authToken fromt the preference dataStore
          * Storing the authToken in authenticationToken variable
          * */
         lifecycleScope.launch(Dispatchers.IO) {
-            preferenceDataStore.read(AppConstant.AUTH_TOKEN).collect { authToken ->
-                authToken?.let { token ->
-                    authenticationToken = token
+            preferenceDataStore.read(AppConstant.AUTH_TOKEN).collect { token ->
+                if (token == "" || token == null) {
+
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        /** Navigating to login fragment*/
+                        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                    }
+
+                } else {
+
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        /** Setting authToken in application class */
+                        token.let {
+                            app.setAuthToken(it)
+                        }
+
+                        /** Navigating to home fragment*/
+                        findNavController().navigate(
+                            R.id.action_splashFragment_to_homeFragment
+                        )
+                    }
                 }
             }
-        }
-
-        if (authenticationToken == "") {
-            /** Navigating to login fragment*/
-            findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-
-        } else {
-            /** Setting authToken in application class */
-            app.setAuthToken(authenticationToken)
-
-            /** Navigating to home fragment*/
-            findNavController().navigate(
-                R.id.action_splashFragment_to_homeFragment
-            )
         }
     }
 }

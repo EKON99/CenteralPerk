@@ -10,5 +10,7 @@
     <string name="phone_number">PHONE NUMBER</string>
     <string name="email_address">EMAIL ADDRESS</string>
     <string name="please_wait">Please wait</string>
+    <string name="name">Name</string>
+    <string name="user_name">UserName</string>
 
 </resources>

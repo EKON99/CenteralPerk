@@ -29,34 +29,145 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/_20sdp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivProfile"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_130sdp"
-                    android:src="@drawable/ic_profile"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvName"
+                    style="@style/input_card_view_style"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/black" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tbSignUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivProfile"
-                    app:tabIndicatorColor="@color/dark_grey"
-                    app:tabSelectedTextColor="@color/black"
-                    app:tabTextColor="@color/dark_grey" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_16sdp">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etName"
+                            style="@style/edit_text_style"
+                            android:hint="@string/name"
+                            android:inputType="textEmailAddress"
+                            android:text="@={data.name}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvUserName"
+                    style="@style/input_card_view_style"
+                    android:layout_marginTop="@dimen/_18sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tbSignUp" />
+                    app:layout_constraintTop_toBottomOf="@id/cvName">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_16sdp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etUserName"
+                            style="@style/edit_text_style"
+                            android:hint="@string/user_name"
+                            android:inputType="textEmailAddress"
+                            android:text="@={data.userName}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvEmail"
+                    style="@style/input_card_view_style"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cvUserName">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_16sdp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etEmail"
+                            style="@style/edit_text_style"
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress"
+                            android:text="@={data.email}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvPassword"
+                    style="@style/input_card_view_style"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cvEmail">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="@dimen/_16sdp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPassword"
+                            style="@style/edit_text_style"
+                            android:layout_width="0dp"
+                            android:hint="@string/password"
+                            android:inputType="textPassword"
+                            android:maxLength="30"
+                            android:text="@={data.password}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivVisibility"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivVisibility"
+                            android:layout_width="@dimen/_19sdp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@id/etPassword"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/etPassword" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSignUp"
+                    style="@style/button_style"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:text="@string/sign_up"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cvPassword" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvLogin"
+                    style="@style/text_view_style"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:text="@string/login"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btnSignUp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
