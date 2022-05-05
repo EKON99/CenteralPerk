@@ -31,6 +31,10 @@ class LoginViewModel @Inject constructor(
 
     val password = ObservableField("")
 
+    /** Navigating mutable state*/
+    private val navigationMutableState = MutableStateFlow(false)
+    val navigate = navigationMutableState.asStateFlow()
+
     /** Password visibility StateFlow */
     private val visibilityMutableState = MutableStateFlow(false)
     val visibility = visibilityMutableState.asStateFlow()
@@ -78,6 +82,17 @@ class LoginViewModel @Inject constructor(
 
                     /** Storing the authToken in application class */
                     response.successFul?.data?.token?.let { token -> app.setAuthToken(token) }
+
+                    viewModelScope.launch(Dispatchers.Main) {
+                        Toast.makeText(
+                            app.baseContext,
+                            response.successFul?.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    /** Changing navigation state*/
+                    navigationMutableState.value = true
 
                 }
                 is ApiResponse.ApiError<*> -> {

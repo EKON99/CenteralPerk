@@ -76,6 +76,19 @@ class LoginFragment : Fragment() {
                 binding.ivVisibility.setImageResource(R.drawable.ic_visiblity_on)
             }
         }
+
+        /**
+         * Collecting the navigation state
+         * */
+        lifecycleScope.launch {
+            viewModel.navigate.collect { navigationState ->
+                if (navigationState) {
+
+                    /** Navigating back to home fragment */
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                }
+            }
+        }
     }
 
     /**

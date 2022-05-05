@@ -77,6 +77,19 @@ class SignUpFragment : Fragment() {
                 binding.ivVisibility.setImageResource(R.drawable.ic_visiblity_on)
             }
         }
+
+        /**
+         * Collecting the navigation state
+         * */
+        lifecycleScope.launch {
+            viewModel.navigate.collect { navigationState ->
+                if (navigationState) {
+
+                    /** Navigating back to login fragment */
+                    findNavController().navigateUp()
+                }
+            }
+        }
     }
 
     /**

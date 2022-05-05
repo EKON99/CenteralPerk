@@ -26,6 +26,7 @@ class AppConstant {
 
         /** Api Tag */
         const val EMAIL = "email"
+        const val NAME = "name"
         const val USERNAME = "username"
         const val PASSWORD = "password"
         const val TOKEN = "Token"
