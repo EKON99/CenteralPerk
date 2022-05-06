@@ -10,7 +10,6 @@ class AppConstant {
         const val LOADER_TAG = "DialogBox loader"
         const val MESSAGE = "message"
         const val SOMETHING_WENT_WRONG = "Something went wrong"
-        const val INTERNET_CONNECTION = "Please check your internet connection"
         const val SERVER_TIME_OUT = "Server time out"
         const val USER_NAME_OR_EMAIL_EMPTY = "Username or email is required"
         const val PASSWORD_EMPTY = "Password is required"
@@ -19,6 +18,7 @@ class AppConstant {
         const val EMAIL_EMPTY = "Email is required"
         const val EMAIL_VALIDATION = "Enter valid email"
         const val PASSWORD_REQUIRED = "Password must be minimum 4 characters"
+        const val NETWORK_CONNECTION = "Please check your internet connection"
 
         /** Preference dataStore key and name */
         const val PREFERENCE_DATASTORE = "Preference dataStore"

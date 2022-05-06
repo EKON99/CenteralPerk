@@ -9,6 +9,7 @@ import com.example.centeralperk.data.source.ApiResponse
 import com.example.centeralperk.domain.repository.EventListener
 import com.example.centeralperk.domain.usecase.LoginUseCase
 import com.example.centeralperk.util.AppConstant
+import com.example.centeralperk.util.NetworkChecker
 import com.example.centeralperk.util.PreferenceDataStore
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -54,68 +55,78 @@ class LoginViewModel @Inject constructor(
         /** Calling Api in coroutine  */
         viewModelScope.launch(Dispatchers.IO) {
 
-            /** Showing loader */
-            eventListener.showLoader()
+            /** Network checker */
+            if (!NetworkChecker.networkCheck(app.baseContext)) {
 
-            /** Creating json object for api request */
-            val json = JsonObject()
-            json.addProperty(AppConstant.USERNAME, emailOrUserName.get()?.trim())
-            json.addProperty(AppConstant.PASSWORD, password.get())
-
-            /** Calling the loginUseCase */
-            val response = loginUseCase.loginUseCase(json)
-
-            /** 2 seconds delay 'just to see loader ' */
-            delay(2000)
-
-            /** Hiding the loader */
-            eventListener.hideLoader()
-
-            when (response) {
-                is ApiResponse.SuccessFul -> {
-
-                    /** Storing the authToken in preference dataStore */
-                    preferenceDataStore.write(
-                        AppConstant.AUTH_TOKEN,
-                        response.successFul?.data?.token
-                    )
-
-                    /** Storing the authToken in application class */
-                    response.successFul?.data?.token?.let { token -> app.setAuthToken(token) }
-
-                    /** Showing toast message */
-                    viewModelScope.launch(Dispatchers.Main) {
-                        Toast.makeText(
-                            app.baseContext,
-                            response.successFul?.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-
-                    /** Changing navigation state*/
-                    navigationMutableState.value = true
-
+                /** Showing toast if no internet connection */
+                viewModelScope.launch (Dispatchers.Main){
+                    Toast.makeText(app.baseContext,AppConstant.NETWORK_CONNECTION,Toast.LENGTH_SHORT).show()
                 }
-                is ApiResponse.ApiError<*> -> {
+            } else {
 
-                    /** Showing toast message */
-                    viewModelScope.launch(Dispatchers.Main) {
-                        Toast.makeText(
-                            app.baseContext,
-                            response.apiError.toString(),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                /** Showing loader */
+                eventListener.showLoader()
+
+                /** Creating json object for api request */
+                val json = JsonObject()
+                json.addProperty(AppConstant.USERNAME, emailOrUserName.get()?.trim())
+                json.addProperty(AppConstant.PASSWORD, password.get())
+
+                /** Calling the loginUseCase */
+                val response = loginUseCase.loginUseCase(json)
+
+                /** 2 seconds delay 'just to see loader ' */
+                delay(2000)
+
+                /** Hiding the loader */
+                eventListener.hideLoader()
+
+                when (response) {
+                    is ApiResponse.SuccessFul -> {
+
+                        /** Storing the authToken in preference dataStore */
+                        preferenceDataStore.write(
+                            AppConstant.AUTH_TOKEN,
+                            response.successFul?.data?.token
+                        )
+
+                        /** Storing the authToken in application class */
+                        response.successFul?.data?.token?.let { token -> app.setAuthToken(token) }
+
+                        /** Showing toast message */
+                        viewModelScope.launch(Dispatchers.Main) {
+                            Toast.makeText(
+                                app.baseContext,
+                                response.successFul?.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        /** Changing navigation state*/
+                        navigationMutableState.value = true
+
                     }
-                }
-                is ApiResponse.UnKnownError<*> -> {
+                    is ApiResponse.ApiError<*> -> {
 
-                    /** Showing toast message */
-                    viewModelScope.launch(Dispatchers.Main) {
-                        Toast.makeText(
-                            app.baseContext,
-                            response.unKnownError.toString(),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        /** Showing toast message */
+                        viewModelScope.launch(Dispatchers.Main) {
+                            Toast.makeText(
+                                app.baseContext,
+                                response.apiError.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                    is ApiResponse.UnKnownError<*> -> {
+
+                        /** Showing toast message */
+                        viewModelScope.launch(Dispatchers.Main) {
+                            Toast.makeText(
+                                app.baseContext,
+                                response.unKnownError.toString(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }
