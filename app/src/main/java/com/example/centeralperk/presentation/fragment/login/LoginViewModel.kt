@@ -83,6 +83,7 @@ class LoginViewModel @Inject constructor(
                     /** Storing the authToken in application class */
                     response.successFul?.data?.token?.let { token -> app.setAuthToken(token) }
 
+                    /** Showing toast message */
                     viewModelScope.launch(Dispatchers.Main) {
                         Toast.makeText(
                             app.baseContext,
@@ -97,6 +98,7 @@ class LoginViewModel @Inject constructor(
                 }
                 is ApiResponse.ApiError<*> -> {
 
+                    /** Showing toast message */
                     viewModelScope.launch(Dispatchers.Main) {
                         Toast.makeText(
                             app.baseContext,
@@ -107,6 +109,7 @@ class LoginViewModel @Inject constructor(
                 }
                 is ApiResponse.UnKnownError<*> -> {
 
+                    /** Showing toast message */
                     viewModelScope.launch(Dispatchers.Main) {
                         Toast.makeText(
                             app.baseContext,

@@ -78,6 +78,7 @@ class SignUpViewModel @Inject constructor(
             when (response) {
                 is ApiResponse.SuccessFul -> {
 
+                    /** Showing toast message */
                     viewModelScope.launch(Dispatchers.Main) {
                         Toast.makeText(
                             app.baseContext,
@@ -92,6 +93,7 @@ class SignUpViewModel @Inject constructor(
                 }
                 is ApiResponse.ApiError<*> -> {
 
+                    /** Showing toast message */
                     viewModelScope.launch(Dispatchers.Main) {
                         Toast.makeText(
                             app.baseContext,
@@ -102,6 +104,7 @@ class SignUpViewModel @Inject constructor(
                 }
                 is ApiResponse.UnKnownError<*> -> {
 
+                    /** Showing toast message */
                     viewModelScope.launch(Dispatchers.Main) {
                         Toast.makeText(
                             app.baseContext,
