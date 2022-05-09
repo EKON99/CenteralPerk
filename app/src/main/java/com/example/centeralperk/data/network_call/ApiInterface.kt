@@ -3,6 +3,7 @@ package com.example.centeralperk.data.network_call
 import com.example.centeralperk.domain.model.LoginResponseModel
 import com.example.centeralperk.domain.model.SignUpResponseModel
 import com.example.centeralperk.domain.model.UserFeedResponseModel
+import com.example.centeralperk.util.AppConstant
 import com.google.gson.JsonObject
 import retrofit2.Response
 import retrofit2.http.Body
@@ -31,8 +32,12 @@ interface ApiInterface {
     /**
      * User-feed Api request
      * @param p
+     * @param token
      * @return Response UserFeedResponseModel
      */
     @GET("user-feed/")
-    suspend fun userFeed(@Query("p") p:String): Response<UserFeedResponseModel>
+    suspend fun userFeed(
+        @Query(AppConstant.PAGE) p: String,
+        @Body token: String
+    ): Response<UserFeedResponseModel>
 }

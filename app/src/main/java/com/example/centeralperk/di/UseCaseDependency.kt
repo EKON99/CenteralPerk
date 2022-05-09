@@ -1,6 +1,7 @@
 package com.example.centeralperk.di
 
 import com.example.centeralperk.domain.repository.NetworkRepo
+import com.example.centeralperk.domain.usecase.HomeUseCase
 import com.example.centeralperk.domain.usecase.LoginUseCase
 import com.example.centeralperk.domain.usecase.SignUpUseCase
 import dagger.Module
@@ -23,5 +24,11 @@ object UseCaseDependency {
     @Singleton
     fun providesSignUpUseCase(networkRepo: NetworkRepo): SignUpUseCase {
         return SignUpUseCase(networkRepo)
+    }
+
+    @Provides
+    @Singleton
+    fun providesHomeUseCase(networkRepo: NetworkRepo): HomeUseCase {
+        return HomeUseCase(networkRepo)
     }
 }

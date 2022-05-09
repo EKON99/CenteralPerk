@@ -29,6 +29,9 @@ class AppConstant {
         const val NAME = "name"
         const val USERNAME = "username"
         const val PASSWORD = "password"
-        const val TOKEN = "Token"
+        const val TOKEN = "token"
+
+        /** Api request */
+        const val PAGE = "p"
     }
 }

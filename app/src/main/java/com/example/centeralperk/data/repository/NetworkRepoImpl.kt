@@ -5,6 +5,7 @@ import com.example.centeralperk.data.source.ApiResponse
 import com.example.centeralperk.data.source.SafeApiRequest
 import com.example.centeralperk.domain.model.LoginResponseModel
 import com.example.centeralperk.domain.model.SignUpResponseModel
+import com.example.centeralperk.domain.model.UserFeedResponseModel
 import com.example.centeralperk.domain.repository.NetworkRepo
 import com.google.gson.JsonObject
 
@@ -28,6 +29,19 @@ class NetworkRepoImpl(
      */
     override suspend fun signUp(jsonObject: JsonObject): ApiResponse<SignUpResponseModel?> {
         return apiRequest { apiInterface.signUp(jsonObject) }
+    }
+
+    /**
+     * Calling ApiInterface userFeed function
+     *  @param page
+     *  @param authToken
+     *  @return ApiResponse UserFeedResponseModel
+     */
+    override suspend fun userFeed(
+        page: String,
+        authToken: String
+    ): ApiResponse<UserFeedResponseModel?> {
+        return apiRequest { apiInterface.userFeed(page, authToken) }
     }
 
 }
