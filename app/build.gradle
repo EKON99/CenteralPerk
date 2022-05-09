@@ -109,4 +109,12 @@ dependencies {
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
     implementation 'androidx.datastore:datastore-preferences-core:1.0.0'
 
+    /** Chucker dependency components */
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+
+    /** Okhttp dependency components */
+    implementation 'com.squareup.okhttp3:okhttp-bom:4.9.3'
+    implementation 'com.squareup.okhttp3:okhttp'
+    implementation 'com.squareup.okhttp3:logging-interceptor'
 }

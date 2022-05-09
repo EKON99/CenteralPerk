@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Keep
 @Parcelize
 data class LoginResponseModel(
-    val `data`: Data,
-    val message: String,
-    val status: Boolean
+    val `data`: Data?,
+    val message: String?,
+    val status: Boolean?
 ) : Parcelable
