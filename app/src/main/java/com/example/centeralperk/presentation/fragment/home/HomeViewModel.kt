@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     private val app: App
 ) : ViewModel() {
 
-    var page = 1
+    var page = 2
 
     /**
      * Calling homeUseCase userFeed function
@@ -49,10 +49,10 @@ class HomeViewModel @Inject constructor(
                 eventListener.showLoader()
 
                 /** Calling the loginUseCase */
-                val response = home.homeUserFeed(page.toString(),app.getAuthToken())
+                val response = home.homeUserFeed(page.toString(), app.getAuthToken())
 
                 /** 2 seconds delay 'just to see loader ' */
-                delay(2000)
+                delay(1000)
 
                 /** Hiding the loader */
                 eventListener.hideLoader()

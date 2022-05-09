@@ -33,5 +33,6 @@ class AppConstant {
 
         /** Api request */
         const val PAGE = "p"
+        const val AUTHORIZATION = "Authorization"
     }
 }

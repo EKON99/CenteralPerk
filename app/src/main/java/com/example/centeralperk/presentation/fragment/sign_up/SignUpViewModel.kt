@@ -84,7 +84,7 @@ class SignUpViewModel @Inject constructor(
                 val response = signUpUseCase.signUpUseCase(json)
 
                 /** 2 seconds delay 'just to see loader ' */
-                delay(2000)
+                delay(1000)
 
                 /** Hiding the loader */
                 eventListener.hideLoader()

@@ -6,10 +6,7 @@ import com.example.centeralperk.domain.model.UserFeedResponseModel
 import com.example.centeralperk.util.AppConstant
 import com.google.gson.JsonObject
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiInterface {
 
@@ -38,6 +35,6 @@ interface ApiInterface {
     @GET("user-feed/")
     suspend fun userFeed(
         @Query(AppConstant.PAGE) p: String,
-        @Body token: String
+        @Header(AppConstant.AUTHORIZATION) token: String
     ): Response<UserFeedResponseModel>
 }
