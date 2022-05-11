@@ -23,10 +23,10 @@ class HomeViewModel @Inject constructor(
     private val app: App
 ) : ViewModel() {
 
-    var page = 2
+    var page: Int? = 1
 
     /** LoaderMutableStateFlow */
-    val loaderMutableState = MutableStateFlow(false)
+    val refreshLoaderMutableState = MutableStateFlow(false)
 
     /**
      * Calling homeUseCase userFeed function
@@ -49,20 +49,15 @@ class HomeViewModel @Inject constructor(
                 }
             } else {
 
-                /** Showing loader */
-                eventListener.showLoader()
-
                 /** Calling the loginUseCase */
-                val response = home.homeUserFeed(page.toString(), app.getAuthToken())
-
-                /** 2 seconds delay 'just to see loader ' */
-                delay(1000)
-
-                /** Hiding the loader */
-                eventListener.hideLoader()
+                val response =
+                    page?.toString()?.let { page -> home.homeUserFeed(page, app.getAuthToken()) }
 
                 when (response) {
                     is ApiResponse.SuccessFul -> {
+
+                        /** SwipeRefreshLayout loader visibility */
+                        refreshLoaderMutableState.value = true
 
                     }
                     is ApiResponse.ApiError<*> -> {
@@ -87,71 +82,7 @@ class HomeViewModel @Inject constructor(
                             ).show()
                         }
                     }
-                }
-            }
-        }
-    }
-
-    /**
-     * Calling homeUseCase startUserFeed function
-     */
-    fun getStartUserFeed() {
-
-        /** Calling Api in coroutine  */
-        viewModelScope.launch(Dispatchers.IO) {
-
-            /** Network checker */
-            if (!NetworkChecker.networkCheck(app.baseContext)) {
-
-                /** Showing toast if no internet connection */
-                viewModelScope.launch(Dispatchers.Main) {
-                    Toast.makeText(
-                        app.baseContext,
-                        AppConstant.NETWORK_CONNECTION,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                /** Changing loader visibility state */
-                loaderMutableState.value = true
-
-            } else {
-
-                /** Calling the loginUseCase */
-                val response = home.homeUserFeed(page.toString(), app.getAuthToken())
-
-                /** 2 seconds delay 'just to see loader ' */
-                delay(1000)
-
-                /** Changing loader visibility state */
-                loaderMutableState.value = true
-
-                when (response) {
-                    is ApiResponse.SuccessFul -> {
-
-                    }
-                    is ApiResponse.ApiError<*> -> {
-
-                        /** Showing toast message */
-                        viewModelScope.launch(Dispatchers.Main) {
-                            Toast.makeText(
-                                app.baseContext,
-                                response.apiError.toString(),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                    is ApiResponse.UnKnownError<*> -> {
-
-                        /** Showing toast message */
-                        viewModelScope.launch(Dispatchers.Main) {
-                            Toast.makeText(
-                                app.baseContext,
-                                response.unKnownError.toString(),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
+                    else -> {}
                 }
             }
         }

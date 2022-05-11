@@ -42,6 +42,8 @@ class HomeFragment : Fragment() {
 
         /** SetObserver */
         setObserver()
+
+        /** */
     }
 
     /** SetObserver */
@@ -49,11 +51,11 @@ class HomeFragment : Fragment() {
 
         /** Collecting loader state*/
         lifecycleScope.launch {
-            viewModel.loaderMutableState.collect {
+            viewModel.refreshLoaderMutableState.collect {
                 binding.srlRefresh.isRefreshing = false
 
                 /** Changing swipeRefreshLoader visibilityState */
-                viewModel.loaderMutableState.value = false
+                viewModel.refreshLoaderMutableState.value = false
             }
         }
     }
@@ -68,7 +70,7 @@ class HomeFragment : Fragment() {
 
             /** Calling viewModel getStartUserFeed */
             viewModel.page = 1
-            viewModel.getStartUserFeed()
+            viewModel.getUserFeed()
         }
     }
 }
