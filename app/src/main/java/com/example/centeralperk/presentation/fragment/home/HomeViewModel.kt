@@ -5,13 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.centeralperk.app.App
 import com.example.centeralperk.data.source.ApiResponse
-import com.example.centeralperk.domain.repository.EventListener
 import com.example.centeralperk.domain.usecase.HomeUseCase
 import com.example.centeralperk.util.AppConstant
 import com.example.centeralperk.util.NetworkChecker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +17,6 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val home: HomeUseCase,
-    private val eventListener: EventListener,
     private val app: App
 ) : ViewModel() {
 
@@ -27,6 +24,9 @@ class HomeViewModel @Inject constructor(
 
     /** LoaderMutableStateFlow */
     val refreshLoaderMutableState = MutableStateFlow(false)
+
+    /** LoaderMutableStateFlow */
+    val newUserFeedLoaderMutableState = MutableStateFlow(false)
 
     /**
      * Calling homeUseCase userFeed function
@@ -47,18 +47,34 @@ class HomeViewModel @Inject constructor(
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+
+                /** SwipeRefreshLayout loader visibility */
+                refreshLoaderMutableState.value = true
+
+                /** NewUserFeedLoader visibility */
+                newUserFeedLoaderMutableState.value = true
+
             } else {
 
                 /** Calling the loginUseCase */
                 val response =
                     page?.toString()?.let { page -> home.homeUserFeed(page, app.getAuthToken()) }
 
+                /** SwipeRefreshLayout loader visibility */
+                refreshLoaderMutableState.value = true
+
+                /** NewUserFeedLoader visibility */
+                newUserFeedLoaderMutableState.value = true
+
                 when (response) {
                     is ApiResponse.SuccessFul -> {
 
-                        /** SwipeRefreshLayout loader visibility */
-                        refreshLoaderMutableState.value = true
-
+                        /** Changing page number */
+                        page = if (response.successFul?.next != null) {
+                            Integer.parseInt(response.successFul.next.last().toString())
+                        } else {
+                            null
+                        }
                     }
                     is ApiResponse.ApiError<*> -> {
 
