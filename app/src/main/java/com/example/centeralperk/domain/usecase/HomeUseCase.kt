@@ -1,7 +1,6 @@
 package com.example.centeralperk.domain.usecase
 
 import com.example.centeralperk.data.source.ApiResponse
-import com.example.centeralperk.domain.model.UserFeedResponseModel
 import com.example.centeralperk.domain.repository.NetworkRepo
 
 class HomeUseCase(

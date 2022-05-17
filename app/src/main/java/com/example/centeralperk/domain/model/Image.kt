@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
-data class UserFeedResponseModel(
-    val count: Int?,
-    val next: String?,
-    val results: List<ResultX?>
+data class Image(
+    val id: Int?,
+    val image: String?,
+    val post_id: Int?
 ) : Parcelable

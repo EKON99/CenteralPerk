@@ -2,7 +2,8 @@ package com.example.centeralperk.domain.model
 
 import android.os.Parcelable
 import androidx.annotation.Keep
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Keep
 @Parcelize

@@ -5,7 +5,6 @@ import com.example.centeralperk.data.source.ApiResponse
 import com.example.centeralperk.data.source.SafeApiRequest
 import com.example.centeralperk.domain.model.LoginResponseModel
 import com.example.centeralperk.domain.model.SignUpResponseModel
-import com.example.centeralperk.domain.model.UserFeedResponseModel
 import com.example.centeralperk.domain.repository.NetworkRepo
 import com.google.gson.JsonObject
 
