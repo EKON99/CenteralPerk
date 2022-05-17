@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
 
     var page: Int? = 1
 
-    val userFeedList = arrayListOf<List<ResultX?>>()
+    val userFeedList : ArrayList<ResultX> = arrayListOf()
 
     val adapter = HomeFragmentUserFeedAdapter(userFeedList, app.baseContext)
 
@@ -86,7 +86,11 @@ class HomeViewModel @Inject constructor(
 
                         /** Adding userFeed in userFeedList */
                         response.successFul?.results?.let { userFeeds ->
-                            userFeedList.addAll(listOf(userFeeds))
+                            userFeeds.forEach{ feed ->
+                                if (feed != null) {
+                                    userFeedList.add(feed)
+                                }
+                            }
                         }
 
                         /** Notifying the adapter */

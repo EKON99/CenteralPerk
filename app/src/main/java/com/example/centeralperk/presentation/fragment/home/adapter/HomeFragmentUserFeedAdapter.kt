@@ -13,7 +13,7 @@ import com.example.centeralperk.domain.model.ResultX
 import com.example.centeralperk.util.AppConstant
 
 class HomeFragmentUserFeedAdapter(
-    private val userFeedList: ArrayList<List<ResultX?>>,
+    private val userFeedList: ArrayList<ResultX>,
     private val context: Context
 ) :
     RecyclerView.Adapter<HomeFragmentUserFeedAdapter.Holder>() {
@@ -47,24 +47,24 @@ class HomeFragmentUserFeedAdapter(
     /** Setting element when recycler view is bind with view */
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
-        val feed = userFeedList[0][position]
+        val feed = userFeedList[position]
 
         /** UserProfile image set */
-        Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed?.image}").circleCrop()
+        Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed.image}").circleCrop()
             .into(holder.userProfileImage)
 
         /** Setting feed image if feed image is not null or empty */
-        if (!feed?.images.isNullOrEmpty()) {
+        if (!feed.images.isNullOrEmpty()) {
             holder.userFeedImage.visibility = VISIBLE
-            Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed?.images}").circleCrop()
+            Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed.images}").circleCrop()
                 .into(holder.userFeedImage)
         }
 
         /** UserProfile name */
-        holder.userProfileName.text = feed?.username
+        holder.userProfileName.text = feed.username
 
         /** UserFeed Content */
-        holder.userContent.text = feed?.content
+        holder.userContent.text = feed.content
     }
 
     /**
