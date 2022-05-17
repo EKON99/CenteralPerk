@@ -2,6 +2,7 @@ package com.example.centeralperk.presentation.fragment.home.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -54,10 +55,11 @@ class HomeFragmentUserFeedAdapter(
             .into(holder.userProfileImage)
 
         /** Setting feed image if feed image is not null or empty */
-        if (!feed.images.isNullOrEmpty()) {
+        if (feed.images.isNullOrEmpty()) {
+            holder.userFeedImage.visibility = GONE
+        }else{
             holder.userFeedImage.visibility = VISIBLE
-            Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed.images}").circleCrop()
-                .into(holder.userFeedImage)
+            Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed.images[0].image}").into(holder.userFeedImage)
         }
 
         /** UserProfile name */
