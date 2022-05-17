@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.centeralperk.databinding.FragmentHomeBinding
-import com.example.centeralperk.presentation.fragment.home.adapter.HomeFragmentUserFeedAdapter
+import com.example.centeralperk.util.AppConstant
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -40,7 +40,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         /** Calling viewModel getUserFeed function */
-        viewModel.getUserFeed()
+        if (viewModel.userFeedList.isEmpty()) {
+            viewModel.getUserFeed()
+        }
 
         /** Refresh listener */
         swipeRefresh()
@@ -57,8 +59,8 @@ class HomeFragment : Fragment() {
      * */
     private fun userFeedRecyclerView() {
 
-        val adapter = HomeFragmentUserFeedAdapter()
-        binding.rvUserFeed.adapter = adapter
+        /** Setting recycler view adapter */
+        binding.rvUserFeed.adapter = viewModel.adapter
 
         binding.rvUserFeed.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -67,10 +69,15 @@ class HomeFragment : Fragment() {
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
 
                     if (viewModel.page != null) {
+
+                        /** Showing the loader */
                         binding.cvLoader.visibility = VISIBLE
+
+                        /** Calling viewModel getUserFeed function */
                         viewModel.getUserFeed()
+
                     } else {
-                        Toast.makeText(context, "no data", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, AppConstant.NO_DATA, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -110,6 +117,7 @@ class HomeFragment : Fragment() {
         binding.srlRefresh.setOnRefreshListener {
 
             /** Calling viewModel getStartUserFeed */
+            viewModel.userFeedList.clear()
             viewModel.page = 1
             viewModel.getUserFeed()
         }

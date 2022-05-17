@@ -6,6 +6,7 @@ class AppConstant {
 
         /** API base url */
         const val BASE_URl = "http://13.233.80.8:8000/api/"
+        const val BASE_IMAGE_URL = "http://13.233.80.8:8000/media/"
 
         const val LOADER_TAG = "DialogBox loader"
         const val MESSAGE = "message"
@@ -19,6 +20,7 @@ class AppConstant {
         const val EMAIL_VALIDATION = "Enter valid email"
         const val PASSWORD_REQUIRED = "Password must be minimum 4 characters"
         const val NETWORK_CONNECTION = "Please check your internet connection"
+        const val NO_DATA = "No data"
 
         /** Preference dataStore key and name */
         const val PREFERENCE_DATASTORE = "Preference dataStore"

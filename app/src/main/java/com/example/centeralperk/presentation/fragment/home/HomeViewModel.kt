@@ -1,11 +1,14 @@
 package com.example.centeralperk.presentation.fragment.home
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.centeralperk.app.App
 import com.example.centeralperk.data.source.ApiResponse
+import com.example.centeralperk.domain.model.ResultX
 import com.example.centeralperk.domain.usecase.HomeUseCase
+import com.example.centeralperk.presentation.fragment.home.adapter.HomeFragmentUserFeedAdapter
 import com.example.centeralperk.util.AppConstant
 import com.example.centeralperk.util.NetworkChecker
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +25,10 @@ class HomeViewModel @Inject constructor(
 
     var page: Int? = 1
 
+    val userFeedList = arrayListOf<List<ResultX?>>()
+
+    val adapter = HomeFragmentUserFeedAdapter(userFeedList, app.baseContext)
+
     /** LoaderMutableStateFlow */
     val refreshLoaderMutableState = MutableStateFlow(false)
 
@@ -31,6 +38,7 @@ class HomeViewModel @Inject constructor(
     /**
      * Calling homeUseCase userFeed function
      */
+    @SuppressLint("NotifyDataSetChanged")
     fun getUserFeed() {
 
         /** Calling Api in coroutine  */
@@ -74,6 +82,16 @@ class HomeViewModel @Inject constructor(
                             Integer.parseInt(response.successFul.next.last().toString())
                         } else {
                             null
+                        }
+
+                        /** Adding userFeed in userFeedList */
+                        response.successFul?.results?.let { userFeeds ->
+                            userFeedList.addAll(listOf(userFeeds))
+                        }
+
+                        /** Notifying the adapter */
+                        viewModelScope.launch(Dispatchers.Main) {
+                            adapter.notifyDataSetChanged()
                         }
                     }
                     is ApiResponse.ApiError<*> -> {

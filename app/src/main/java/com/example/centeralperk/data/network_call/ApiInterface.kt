@@ -2,6 +2,7 @@ package com.example.centeralperk.data.network_call
 
 import com.example.centeralperk.domain.model.LoginResponseModel
 import com.example.centeralperk.domain.model.SignUpResponseModel
+import com.example.centeralperk.domain.model.UserFeedResponseModel
 import com.example.centeralperk.util.AppConstant
 import com.google.gson.JsonObject
 import retrofit2.Response
