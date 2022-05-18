@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
 
     var page: Int? = 1
 
-    val userFeedList : ArrayList<ResultX> = arrayListOf()
+    val userFeedList: ArrayList<ResultX> = arrayListOf()
 
     val adapter = HomeFragmentUserFeedAdapter(userFeedList, app.baseContext)
 
@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
      * Calling homeUseCase userFeed function
      */
     @SuppressLint("NotifyDataSetChanged")
-    fun getUserFeed() {
+    fun getUserFeed(feed: String) {
 
         /** Calling Api in coroutine  */
         viewModelScope.launch(Dispatchers.IO) {
@@ -84,9 +84,14 @@ class HomeViewModel @Inject constructor(
                             null
                         }
 
+                        /** Clearing the userFeedList */
+                        if (feed == AppConstant.REFRESH) {
+                            userFeedList.clear()
+                        }
+
                         /** Adding userFeed in userFeedList */
                         response.successFul?.results?.let { userFeeds ->
-                            userFeeds.forEach{ feed ->
+                            userFeeds.forEach { feed ->
                                 if (feed != null) {
                                     userFeedList.add(feed)
                                 }
@@ -124,5 +129,13 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    /**
+     * Network check
+     * @return Boolean
+     */
+    fun networkCheck(): Boolean {
+        return NetworkChecker.networkCheck(app.baseContext)
     }
 }

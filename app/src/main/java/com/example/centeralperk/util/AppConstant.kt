@@ -21,6 +21,8 @@ class AppConstant {
         const val PASSWORD_REQUIRED = "Password must be minimum 4 characters"
         const val NETWORK_CONNECTION = "Please check your internet connection"
         const val NO_DATA = "No data"
+        const val REFRESH = "Refresh"
+        const val ADD_FEED = "Add feed"
 
         /** Preference dataStore key and name */
         const val PREFERENCE_DATASTORE = "Preference dataStore"

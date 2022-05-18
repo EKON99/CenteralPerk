@@ -11,7 +11,7 @@ object NetworkChecker {
      * @param context
      * @return Boolean
      */
-    suspend fun networkCheck(context: Context): Boolean {
+    fun networkCheck(context: Context): Boolean {
 
         /** Network connectivityManager */
         val connectivityManager =

@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
 
         /** Calling viewModel getUserFeed function */
         if (viewModel.userFeedList.isEmpty()) {
-            viewModel.getUserFeed()
+            viewModel.getUserFeed(AppConstant.REFRESH)
         }
 
         /** Refresh listener */
@@ -74,7 +74,7 @@ class HomeFragment : Fragment() {
                         binding.cvLoader.visibility = VISIBLE
 
                         /** Calling viewModel getUserFeed function */
-                        viewModel.getUserFeed()
+                        viewModel.getUserFeed(AppConstant.ADD_FEED)
 
                     } else {
                         Toast.makeText(context, AppConstant.NO_DATA, Toast.LENGTH_SHORT).show()
@@ -116,10 +116,25 @@ class HomeFragment : Fragment() {
         /** SwipeRefreshListener */
         binding.srlRefresh.setOnRefreshListener {
 
+            /** Network checker */
+            if (!viewModel.networkCheck()) {
+
+                /** Showing toast if no internet connection */
+                Toast.makeText(
+                    context,
+                    AppConstant.NETWORK_CONNECTION,
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                /** Changing swipeRefreshLoader visibilityState */
+                binding.srlRefresh.isRefreshing = false
+
+                return@setOnRefreshListener
+            }
+
             /** Calling viewModel getStartUserFeed */
-            viewModel.userFeedList.clear()
             viewModel.page = 1
-            viewModel.getUserFeed()
+            viewModel.getUserFeed(AppConstant.REFRESH)
         }
     }
 }
