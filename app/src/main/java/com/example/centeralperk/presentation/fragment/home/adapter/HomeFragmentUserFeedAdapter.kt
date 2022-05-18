@@ -49,6 +49,31 @@ class HomeFragmentUserFeedAdapter(
     /** Setting element when recycler view is bind with view */
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         val feed = userFeedList[position]
 
         /** UserProfile image set */

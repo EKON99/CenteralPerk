@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.centeralperk.R
 import com.example.centeralperk.databinding.UserFeedViewPagerAdapterBinding
 import com.example.centeralperk.domain.model.Image
+import com.example.centeralperk.util.AppConstant
 
 class HomeFragmentUserFeedViewPagerAdapter(
     private val images: ArrayList<Image>,
@@ -46,7 +47,7 @@ class HomeFragmentUserFeedViewPagerAdapter(
     override fun onBindViewHolder(holder: ViewPagerHolder, position: Int) {
 
         /** Setting the images in viewPager */
-        Glide.with(context).load(images[position].image).into(holder.userFeedImage)
+        Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${images[position].image}").into(holder.userFeedImage)
     }
 
     /**
