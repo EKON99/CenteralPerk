@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/default_dot.xml" value="0.113" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.1" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.1" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/ic_visiblity_on.xml" value="0.1" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/image_rotate.xml" value="0.1" />
+        <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/selected_dot.xml" value="0.113" />
+        <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/tab_selected.xml" value="0.113" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/fragment_dialog_loader.xml" value="0.22" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/fragment_email.xml" value="0.1" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/fragment_home.xml" value="0.22" />
@@ -15,6 +18,7 @@
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/fragment_sign_up.xml" value="0.16682113067655235" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/fragment_splash.xml" value="0.1" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/user_feed_recycler_view_template.xml" value="0.2" />
+        <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/user_feed_view_pager_adapter.xml" value="0.14719202898550723" />
       </map>
     </option>
   </component>

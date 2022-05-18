@@ -13,6 +13,7 @@ import com.example.centeralperk.databinding.UserFeedRecyclerViewTemplateBinding
 import com.example.centeralperk.domain.model.Image
 import com.example.centeralperk.domain.model.ResultX
 import com.example.centeralperk.util.AppConstant
+import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragmentUserFeedAdapter(
     private val userFeedList: ArrayList<ResultX>,
@@ -29,6 +30,7 @@ class HomeFragmentUserFeedAdapter(
         val userProfileName = view.tvUserName
         val userFeedViewPager = view.viewPager
         val userContent = view.tvContent
+        val viewPagerDots = view.viewPagerDots
     }
 
     /** Recycler view onCreate
@@ -48,31 +50,6 @@ class HomeFragmentUserFeedAdapter(
 
     /** Setting element when recycler view is bind with view */
     override fun onBindViewHolder(holder: Holder, position: Int) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         val feed = userFeedList[position]
 
@@ -95,6 +72,15 @@ class HomeFragmentUserFeedAdapter(
             }
             holder.userFeedViewPager.adapter =
                 HomeFragmentUserFeedViewPagerAdapter(imagesList, context)
+
+            if (imagesList.size > 1) {
+                holder.viewPagerDots.visibility = VISIBLE
+
+                /** Showing the dots */
+                TabLayoutMediator(holder.viewPagerDots, holder.userFeedViewPager) { _, _ ->
+                }.attach()
+            }
+
         }
 
         /** UserProfile name */
