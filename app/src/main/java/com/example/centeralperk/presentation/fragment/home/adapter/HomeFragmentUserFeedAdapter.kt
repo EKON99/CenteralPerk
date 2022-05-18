@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.centeralperk.R
 import com.example.centeralperk.databinding.UserFeedRecyclerViewTemplateBinding
+import com.example.centeralperk.domain.model.Image
 import com.example.centeralperk.domain.model.ResultX
 import com.example.centeralperk.util.AppConstant
 
@@ -26,7 +27,7 @@ class HomeFragmentUserFeedAdapter(
 
         val userProfileImage = view.ivUserProfile
         val userProfileName = view.tvUserName
-        val userFeedImage = view.ivFeedImage
+        val userFeedViewPager = view.viewPager
         val userContent = view.tvContent
     }
 
@@ -54,12 +55,21 @@ class HomeFragmentUserFeedAdapter(
         Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed.image}").circleCrop()
             .into(holder.userProfileImage)
 
-        /** Setting feed image if feed image is not null or empty */
+        /** Passing the Images array to viewPager adapter if feed image is not null or empty */
         if (feed.images.isNullOrEmpty()) {
-            holder.userFeedImage.visibility = GONE
-        }else{
-            holder.userFeedImage.visibility = VISIBLE
-            Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed.images[0].image}").into(holder.userFeedImage)
+            holder.userFeedViewPager.visibility = GONE
+        } else {
+            holder.userFeedViewPager.visibility = VISIBLE
+
+            val imagesList: ArrayList<Image> = arrayListOf()
+
+            feed.images.let { image ->
+                image.forEach { feedImage ->
+                    imagesList.add(feedImage)
+                }
+            }
+            holder.userFeedViewPager.adapter =
+                HomeFragmentUserFeedViewPagerAdapter(imagesList, context)
         }
 
         /** UserProfile name */
