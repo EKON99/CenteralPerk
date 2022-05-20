@@ -57,10 +57,11 @@
 
                 <com.google.android.material.tabs.TabLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    app:tabIndicatorHeight="@dimen/_4sdp"
-                    app:tabIndicatorColor="@color/blue"
+                    android:layout_height="wrap_content"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabBackground="@drawable/tab_selected"
                     android:id="@+id/viewPagerDots"
+                    android:background="@android:color/transparent"
                     android:visibility="gone"
                     android:layout_marginBottom="@dimen/_6sdp"
                     app:layout_constraintStart_toStartOf="parent"
