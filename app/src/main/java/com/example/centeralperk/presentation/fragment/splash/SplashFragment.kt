@@ -65,7 +65,7 @@ class SplashFragment : Fragment() {
 
                         /** Navigating to home fragment*/
                         findNavController().navigate(
-                            R.id.action_splashFragment_to_homeFragment
+                           R.id.action_splashFragment_to_homeFragment
                         )
                     }
                 }

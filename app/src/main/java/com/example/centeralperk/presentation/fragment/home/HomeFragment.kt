@@ -11,6 +11,7 @@ import com.example.centeralperk.databinding.FragmentHomeBinding
 import com.example.centeralperk.presentation.fragment.home.notification.NotificationFragment
 import com.example.centeralperk.presentation.fragment.home.profile.ProfileFragment
 import com.example.centeralperk.presentation.fragment.home.search.SearchFragment
+import com.example.centeralperk.presentation.fragment.home.user_feed.adapter.UserFeed
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +37,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         /** Default fragment */
-        setFragment(HomeFragment())
+        setFragment(UserFeed())
 
         /** SetListener */
         setListener()
@@ -50,7 +51,7 @@ class HomeFragment : Fragment() {
         /** BottomNavigationBar item click listener */
         binding.bnvHome.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.home -> setFragment(HomeFragment())
+                R.id.home -> setFragment(UserFeed())
                 R.id.search -> setFragment(SearchFragment())
                 R.id.notification -> setFragment(NotificationFragment())
                 R.id.profile -> setFragment(ProfileFragment())
