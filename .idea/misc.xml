@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/bottom_navigation.xml" value="0.1" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/default_dot.xml" value="0.113" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.1" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.1" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/fragment_user_feed.xml" value="0.1" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/user_feed_recycler_view_template.xml" value="0.2" />
         <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/layout/user_feed_view_pager_adapter.xml" value="0.14719202898550723" />
+        <entry key="..\:/Users/WAR10CK/AndroidStudioProjects/CenteralPerk/app/src/main/res/menu/bottom_navigation_bar.xml" value="0.196875" />
       </map>
     </option>
   </component>
