@@ -12,5 +12,9 @@
     <string name="please_wait">Please wait</string>
     <string name="name">Name</string>
     <string name="user_name">UserName</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="notification">Notification</string>
 
 </resources>
