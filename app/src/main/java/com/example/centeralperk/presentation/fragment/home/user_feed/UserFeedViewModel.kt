@@ -1,4 +1,4 @@
-package com.example.centeralperk.presentation.fragment.home
+package com.example.centeralperk.presentation.fragment.home.user_feed.adapter
 
 import android.annotation.SuppressLint
 import android.widget.Toast
@@ -8,7 +8,6 @@ import com.example.centeralperk.app.App
 import com.example.centeralperk.data.source.ApiResponse
 import com.example.centeralperk.domain.model.ResultX
 import com.example.centeralperk.domain.usecase.HomeUseCase
-import com.example.centeralperk.presentation.fragment.home.adapter.HomeFragmentUserFeedAdapter
 import com.example.centeralperk.util.AppConstant
 import com.example.centeralperk.util.NetworkChecker
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class UserFeedViewModel @Inject constructor(
     private val home: HomeUseCase,
     private val app: App
 ) : ViewModel() {
@@ -27,7 +26,7 @@ class HomeViewModel @Inject constructor(
 
     val userFeedList: ArrayList<ResultX> = arrayListOf()
 
-    val adapter = HomeFragmentUserFeedAdapter(userFeedList, app.baseContext)
+    val adapter = UserFeedFragmentUserFeedAdapter(userFeedList, app.baseContext)
 
     /** LoaderMutableStateFlow */
     val refreshLoaderMutableState = MutableStateFlow(false)

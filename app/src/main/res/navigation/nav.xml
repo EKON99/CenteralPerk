@@ -45,8 +45,8 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.centeralperk.presentation.fragment.home.HomeFragment"
+        android:name="com.example.centeralperk.presentation.fragment.home.user_feed.adapter.UserFeed"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_user_feed" />
 
 </navigation>

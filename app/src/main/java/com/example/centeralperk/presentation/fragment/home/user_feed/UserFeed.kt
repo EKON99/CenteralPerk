@@ -1,4 +1,4 @@
-package com.example.centeralperk.presentation.fragment.home
+package com.example.centeralperk.presentation.fragment.home.user_feed.adapter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,20 +11,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.example.centeralperk.databinding.FragmentHomeBinding
+import com.example.centeralperk.databinding.FragmentUserFeedBinding
 import com.example.centeralperk.util.AppConstant
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class UserFeed : Fragment() {
 
     /** Data binding component */
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentUserFeedBinding
 
     /** ViewModel dependency */
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: UserFeedViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
     ): View {
 
         /** Data binding */
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentUserFeedBinding.inflate(layoutInflater)
         return binding.root
     }
 

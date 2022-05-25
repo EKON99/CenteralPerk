@@ -1,4 +1,4 @@
-package com.example.centeralperk.presentation.fragment.home.adapter
+package com.example.centeralperk.presentation.fragment.home.user_feed.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,11 +12,11 @@ import com.example.centeralperk.databinding.UserFeedViewPagerAdapterBinding
 import com.example.centeralperk.domain.model.Image
 import com.example.centeralperk.util.AppConstant
 
-class HomeFragmentUserFeedViewPagerAdapter(
+class UserFeedFragmentUserFeedViewPagerAdapter(
     private val images: ArrayList<Image>,
     private val context: Context
 ) :
-    RecyclerView.Adapter<HomeFragmentUserFeedViewPagerAdapter.ViewPagerHolder>() {
+    RecyclerView.Adapter<UserFeedFragmentUserFeedViewPagerAdapter.ViewPagerHolder>() {
 
     /** Holder of viewPager
      * @param view

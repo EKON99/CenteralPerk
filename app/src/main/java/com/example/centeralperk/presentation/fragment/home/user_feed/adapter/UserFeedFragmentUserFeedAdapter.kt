@@ -1,4 +1,4 @@
-package com.example.centeralperk.presentation.fragment.home.adapter
+package com.example.centeralperk.presentation.fragment.home.user_feed.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,11 +17,11 @@ import com.example.centeralperk.util.AppConstant
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class HomeFragmentUserFeedAdapter(
+class UserFeedFragmentUserFeedAdapter(
     private val userFeedList: ArrayList<ResultX>,
     private val context: Context
 ) :
-    RecyclerView.Adapter<HomeFragmentUserFeedAdapter.Holder>() {
+    RecyclerView.Adapter<UserFeedFragmentUserFeedAdapter.Holder>() {
 
     /** Holder of recycler view
      * @param view
@@ -61,11 +61,23 @@ class HomeFragmentUserFeedAdapter(
         Glide.with(context).load("${AppConstant.BASE_IMAGE_URL}${feed.image}").circleCrop()
             .into(holder.userProfileImage)
 
+        /** UserProfile name */
+        holder.userProfileName.text = feed.username
+
+        /** UserFeed Content */
+        holder.userContent.text = feed.content
+
         /** Passing the Images array to viewPager adapter if feed image is not null or empty */
-        if (feed.images?.size == 0) {
+        if (feed.images?.size == 0 || feed.images.isNullOrEmpty()) {
 
             /** ViewPager visibility*/
             holder.userFeedViewPager.visibility = GONE
+
+            /** ViewPager dots visibility*/
+            holder.tabLayout.visibility = GONE
+
+            /** PageNumber cardView visibility*/
+            holder.pageNumberCardView.visibility = GONE
 
         } else {
 
@@ -79,17 +91,17 @@ class HomeFragmentUserFeedAdapter(
 
             /** Adding images in userFeedViewPager list */
             feed.images.let { image ->
-                image?.forEach { feedImage ->
+                image.forEach { feedImage ->
                     imagesList.add(feedImage)
                 }
             }
 
             /** ViewPager2 adapter */
             holder.userFeedViewPager.adapter =
-                HomeFragmentUserFeedViewPagerAdapter(imagesList, context)
+                UserFeedFragmentUserFeedViewPagerAdapter(imagesList, context)
 
             /** Showing and hiding the dot indicator */
-            if (imagesList.size <= 1) {
+            if (imagesList.size <= 1 || imagesList.isNullOrEmpty()) {
 
                 /** ViewPager dots visibility*/
                 holder.tabLayout.visibility = GONE
@@ -119,7 +131,7 @@ class HomeFragmentUserFeedAdapter(
                     override fun onTabSelected(tab: TabLayout.Tab?) {
 
                         /** Current ViewPager pageNumber */
-                        tabCurrentPosition = "${tab?.position?.plus(1)}/${imagesList.size}"
+                        tabCurrentPosition = "${tab?.position?.plus(1)}/${holder.tabLayout.tabCount}"
                         holder.pageNumber.text = tabCurrentPosition
                     }
 
@@ -129,12 +141,6 @@ class HomeFragmentUserFeedAdapter(
                 })
             }
         }
-
-        /** UserProfile name */
-        holder.userProfileName.text = feed.username
-
-        /** UserFeed Content */
-        holder.userContent.text = feed.content
     }
 
     /**
