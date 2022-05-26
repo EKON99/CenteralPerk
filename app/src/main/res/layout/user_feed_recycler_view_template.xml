@@ -29,17 +29,15 @@
                     android:layout_height="@dimen/_25sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_head_phones"
+                    android:src="@drawable/ic_profile"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvUserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/text_view_style"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
                     app:layout_constraintBottom_toBottomOf="@id/ivUserProfile"
                     app:layout_constraintStart_toEndOf="@id/ivUserProfile"
                     app:layout_constraintTop_toTopOf="@id/ivUserProfile" />
@@ -57,12 +55,12 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cvPageNumber"
-                    android:visibility="gone"
                     android:layout_width="@dimen/_35sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:backgroundTint="@color/semi_transparent"
+                    android:visibility="gone"
                     app:cardCornerRadius="@dimen/_4sdp"
                     app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -74,8 +72,7 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tvPageNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            style="@style/text_view_style"
                             android:textSize="@dimen/_12ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -141,12 +138,9 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/text_view_style"
                     android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_6sdp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ivLike" />
