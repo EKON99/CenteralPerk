@@ -7,19 +7,21 @@ import androidx.lifecycle.viewModelScope
 import com.example.centeralperk.app.App
 import com.example.centeralperk.data.source.ApiResponse
 import com.example.centeralperk.domain.repository.EventListener
+import com.example.centeralperk.domain.usecase.HomeUseCase
 import com.example.centeralperk.util.AppConstant
 import com.example.centeralperk.util.NetworkChecker
-import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val app: App,
-    private val eventListener: EventListener
+    private val eventListener: EventListener,
+    private val home: HomeUseCase
 ) : ViewModel() {
 
     val userProfileImage = ObservableField("")
@@ -27,6 +29,10 @@ class ProfileViewModel @Inject constructor(
     val userName = ObservableField("")
 
     val userBio = ObservableField("")
+
+    /** UserBio visibility state */
+    private val userBioMutableState = MutableStateFlow(false)
+    val userBioState = userBioMutableState.asStateFlow()
 
     /**
      * Calling the useCase userProfile function
@@ -40,8 +46,12 @@ class ProfileViewModel @Inject constructor(
             if (!NetworkChecker.networkCheck(app.baseContext)) {
 
                 /** Showing toast if no internet connection */
-                viewModelScope.launch (Dispatchers.Main){
-                    Toast.makeText(app.baseContext, AppConstant.NETWORK_CONNECTION, Toast.LENGTH_SHORT).show()
+                viewModelScope.launch(Dispatchers.Main) {
+                    Toast.makeText(
+                        app.baseContext,
+                        AppConstant.NETWORK_CONNECTION,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } else {
 
@@ -49,10 +59,7 @@ class ProfileViewModel @Inject constructor(
                 eventListener.showLoader()
 
                 /** Calling the loginUseCase */
-                val response = loginUseCase.loginUseCase(json)
-
-                /** 2 seconds delay 'just to see loader ' */
-                delay(1000)
+                val response = home.homeUserProfile(app.getAuthToken())
 
                 /** Hiding the loader */
                 eventListener.hideLoader()
@@ -60,6 +67,20 @@ class ProfileViewModel @Inject constructor(
                 when (response) {
                     is ApiResponse.SuccessFul -> {
 
+                        /** Setting Profile Image */
+                        userProfileImage.set("${AppConstant.BASE_IMAGE_URL}${response.successFul?.data?.profile_pic}")
+
+                        /** Setting UserProfile name */
+                        userName.set(response.successFul?.data?.username)
+
+                        /** Setting userBio*/
+                        if (response.successFul?.data?.bio.isNullOrEmpty()) {
+                            return@launch
+                        }
+                        userBio.set(response.successFul?.data?.bio)
+
+                        /** Change userBio visibility state */
+                        userBioMutableState.value = true
 
                     }
                     is ApiResponse.ApiError<*> -> {

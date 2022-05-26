@@ -35,6 +35,12 @@ class AppConstant {
         const val PASSWORD = "password"
         const val TOKEN = "token"
 
+        /** Api Targets tag */
+        const val LOGIN = "login/"
+        const val SIGN_UP = "signup/"
+        const val USER_FEED = "user-feed/"
+        const val USER_PROFILE = "user-profile/"
+
         /** Api request */
         const val PAGE = "p"
         const val AUTHORIZATION = "Authorization"
