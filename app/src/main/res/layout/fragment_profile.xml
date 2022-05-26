@@ -33,9 +33,8 @@
                     android:id="@+id/ivUserProfileImage"
                     android:layout_width="@dimen/_65sdp"
                     android:layout_height="@dimen/_65sdp"
-                    app:imageUrl="@{data.userProfileImage}"
+                    imageUrl="@{data.userProfileImage}"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/light_blue"
                     app:layout_constraintStart_toStartOf="parent"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -48,7 +47,7 @@
                     app:layout_constraintTop_toTopOf="@id/ivUserProfileImage"
                     app:layout_constraintBottom_toBottomOf="@id/ivUserProfileImage"
                     app:layout_constraintStart_toEndOf="@id/ivUserProfileImage"
-                    android:layout_marginStart="@dimen/_25sdp"/>
+                    android:layout_marginStart="@dimen/_18sdp"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"

@@ -35,6 +35,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /** Initializing the dataBinding variable data of xml */
+        binding.data = viewModel
+
         /** Calling the viewModel usreProfile function if userName is not empty */
         if (viewModel.userName.get().isNullOrEmpty()) {
             viewModel.userProfile()
